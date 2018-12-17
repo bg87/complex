@@ -5,11 +5,11 @@ services:
 
 # Build test version of React project
 before_install:
- - docker build -t bg/react-test -f ./client/Dockerfile.dev ./client
+ - docker build -t brandongladen/react-test -f ./client/Dockerfile.dev ./client
 
 # Run tests
 script:
-  - docker run bg/react-test npm test -- --coverage
+  - docker run brandongladen/react-test npm test -- --coverage
 
 # Build prod versions of all projects
 after_success:
