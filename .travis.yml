@@ -1,0 +1,29 @@
+# Specify docker as a dependency
+sudo: required
+services:
+  - docker
+
+# Build test version of React project
+before_install:
+ - docker build -t bg/react-test -f ./client/Dockerfile.dev ./client
+
+# Run tests
+script:
+  - docker run bg/react-test npm test -- --coverage
+
+# Build prod versions of all projects
+after_success:
+  - docker build -t bg/complex-client ./client
+  - docker build -t bg/complex-nginx ./nginx
+  - docker build -t bg/complex-server ./server
+  - docker build -t bg/complex-worker ./worker
+
+# Login to docker hub
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+# Push images to docker hub
+  - docker push bg/complex-client
+  - docker push bg/complex-nginx
+  - docker push bg/complex-server
+  - docker push bg/complex-worker
+
