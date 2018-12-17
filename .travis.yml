@@ -13,17 +13,17 @@ script:
 
 # Build prod versions of all projects
 after_success:
-  - docker build -t bg/complex-client ./client
-  - docker build -t bg/complex-nginx ./nginx
-  - docker build -t bg/complex-server ./server
-  - docker build -t bg/complex-worker ./worker
+  - docker build -t brandongladen/complex-client ./client
+  - docker build -t brandongladen/complex-nginx ./nginx
+  - docker build -t brandongladen/complex-server ./server
+  - docker build -t brandongladen/complex-worker ./worker
 
 # Login to docker hub
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
 # Push images to docker hub
-  - docker push bg/complex-client
-  - docker push bg/complex-nginx
-  - docker push bg/complex-server
-  - docker push bg/complex-worker
+  - docker push brandongladen/complex-client
+  - docker push brandongladen/complex-nginx
+  - docker push brandongladen/complex-server
+  - docker push brandongladen/complex-worker
 
