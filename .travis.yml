@@ -27,3 +27,18 @@ after_success:
   - docker push brandongladen/complex-server
   - docker push brandongladen/complex-worker
 
+# Deploy to aws
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: complex
+  env: Complex-env-1
+  bucket_name: elasticbeanstalk-us-east-2-621727361760
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: $AWS_SECRET_key
+
+
